@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo $0
+
+# Drop into the directory in which this script resides, in case the script is
+# being called from elsewhere
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
 CURRENT_USER=$(whoami)
 
@@ -10,11 +13,4 @@ then
   exit 1
 fi
 
-# Update apt indexes
-apt update
-
-# Install unattended-upgrades package
-apt install unattended-upgrades -y
-
-# Copy config files
-cp config-files/20auto-upgrades /etc/apt/apt.conf.d
+./enable-unattended-upgrades.sh

@@ -1,0 +1,45 @@
+# Empty listen_addresses to use systemd socket activation
+listen_addresses = []
+
+# Server options - both Cloudflare and Quad9 included on IPv4 & IPv6 for redundancy
+server_names = ['cloudflare', 'cloudflare-ipv6', 'quad9-dnscrypt-ip4-nofilter-pri', 'quad9-dnscrypt-ip6-nofilter-pri']
+
+# Backup in case DoH fails
+fallback_resolvers = ['9.9.9.9:53', '1.1.1.1:53', '[2620:fe::fe]:53', '[2606:4700:4700::1111]:53']
+
+# Ignore what's in /etc/resolv.conf
+ignore_system_dns = true
+
+# Use IPv4 servers
+ipv4_servers = true
+
+# Use IPv6 servers
+ipv6_servers = true
+
+# Server must support DNS security extensions (DNSSEC)
+require_dnssec = true
+
+# Maximum number of simultaneous client connections to accept
+max_clients = 10000
+
+# Server must not log user queries (declarative)
+require_nolog = true
+
+# Server must not enforce its own blocklist (for parental control, ads blocking...)
+require_nofilter = true
+
+# edns_client_subnet = ['73.210.0.0/16', '2601:243::/32']
+
+[query_log]
+  file = '/var/log/dnscrypt-proxy/query.log'
+
+[nx_log]
+  file = '/var/log/dnscrypt-proxy/nx.log'
+
+[sources]
+  [sources.'public-resolvers']
+  url = 'https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md'
+  cache_file = '/var/cache/dnscrypt-proxy/public-resolvers.md'
+  minisign_key = 'RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3'
+  refresh_delay = 72
+  prefix = ''

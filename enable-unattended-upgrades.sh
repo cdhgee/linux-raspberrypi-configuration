@@ -10,4 +10,4 @@ apt install unattended-upgrades update-notifier-common -y
 
 # Copy config files
 cp ./config-files/20auto-upgrades /etc/apt/apt.conf.d/20auto-upgrades
-cp ./config-files/50unattended-upgrades /etc/apt.conf.d/50unattended-upgrades
+cp ./config-files/50unattended-upgrades /etc/apt/apt.conf.d/50unattended-upgrades
